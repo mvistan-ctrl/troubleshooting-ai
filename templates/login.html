@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - IT Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        async function login() {
+            const username = document.getElementById("user").value;
+            const password = document.getElementById("pass").value;
+
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                localStorage.setItem("token", data.token);
+                window.location.href = "/chat";
+            } else {
+                alert("Invalid login");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="login-box">
+        <h2>Login</h2>
+        <input id="user" type="text" placeholder="Username">
+        <input id="pass" type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+</body>
+</html>
