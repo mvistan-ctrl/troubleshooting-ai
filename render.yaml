@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: ai-troubleshooter
+    env: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
