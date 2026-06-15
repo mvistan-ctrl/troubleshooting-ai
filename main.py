@@ -29,7 +29,7 @@ def get_current_user(request: Request):
 
 
 @app.get("/", response_class=HTMLResponse)
-def login_page(request: Request):
+async def login_page(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
 
@@ -46,7 +46,7 @@ async def login(data: dict):
 
 
 @app.get("/chat")
-def chat_page(request: Request):
+async def chat_page(request: Request):
     return templates.TemplateResponse("chat.html", {"request": request})
 
 
