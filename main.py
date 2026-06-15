@@ -13,7 +13,7 @@ client = Groq(api_key=GROQ_API_KEY)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
-
+templates.env.cache = {}
 
 def get_current_user(request: Request):
     token = request.headers.get("Authorization")
