@@ -19,4 +19,4 @@ RUN echo "=== TEMPLATE FOLDER CONTENTS ===" && ls -l /app/templates
 EXPOSE 10000
 
 # Start FastAPI
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "10000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "10000", "--workers", "1"]
