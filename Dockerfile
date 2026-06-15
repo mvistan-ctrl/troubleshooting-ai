@@ -8,8 +8,12 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy project files
-COPY . .
+COPY main.py .
+COPY auth.py .
+COPY templates ./templates
+COPY static ./static
+
+RUN ls -R /app
 
 # Expose Render port
 EXPOSE 10000
