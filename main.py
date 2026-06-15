@@ -1,3 +1,6 @@
+print("=== DEBUG: main.py content ===")
+with open(__file__, "r") as f:
+    print(f.read())
 from fastapi import FastAPI, Request, HTTPException, Depends
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
