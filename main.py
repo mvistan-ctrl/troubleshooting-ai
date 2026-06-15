@@ -1,8 +1,5 @@
-print("=== DEBUG: main.py content ===")
-with open(__file__, "r") as f:
-    print(f.read())
-from fastapi import FastAPI, Request, HTTPException, Depends
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from groq import Groq
@@ -18,23 +15,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 templates.env.cache = {}
 
-def get_current_user(request: Request):
-    token = request.headers.get("Authorization")
-    if not token:
-        raise HTTPException(status_code=401, detail="Missing token")
-
-    token = token.replace("Bearer ", "")
-    user = verify_token(token)
-    if not user:
-        raise HTTPException(status_code=401, detail="Invalid or expired token")
-
-    return user
-
-
 @app.get("/", response_class=HTMLResponse)
 async def login_page(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
-
 
 @app.post("/login")
 async def login(data: dict):
@@ -46,7 +29,6 @@ async def login(data: dict):
         return {"token": token}
 
     raise HTTPException(status_code=401, detail="Invalid credentials")
-
 
 @app.get("/chat")
 async def chat_page(request: Request):
