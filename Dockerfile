@@ -1,6 +1,6 @@
 # Use Python 3.11
 FROM python:3.11-slim-bullseye
-ARG CACHE_BREAK=2
+ARG CACHE_BREAK=3
 
 # Set working directory
 WORKDIR /app
