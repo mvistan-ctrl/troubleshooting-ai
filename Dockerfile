@@ -10,6 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY main.py .
 COPY auth.py .
+COPY templates ./templates
 COPY static ./static
 RUN echo "=== TEMPLATE FOLDER CONTENTS ===" && ls -l /app/templates
 
