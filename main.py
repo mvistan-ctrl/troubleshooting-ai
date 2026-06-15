@@ -48,32 +48,3 @@ async def login(data: dict):
 @app.get("/chat")
 async def chat_page(request: Request):
     return templates.TemplateResponse("chat.html", {"request": request})
-
-
-@app.post("/api/chat")
-async def chat(payload: dict, user=Depends(get_current_user)):
-    user_message = payload.get("message", "")
-
-    response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        
-        messages = [
-    {
-        "role": "system",
-        "content": (
-            "You are an IT Troubleshooting Assistant. "
-            "Always respond in clean, well‑structured Markdown. "
-            "Use headings, bullet points, numbered steps, and short paragraphs. "
-            "Keep explanations concise, professional, and easy to follow. "
-            "When asking diagnostic questions, group them logically. "
-            "When giving instructions, present them as step‑by‑step actions. "
-            "Avoid long walls of text."
-        )
-    },
-    {"role": "user", "content": user_message}
-]
-
-    )
-
-    ai_reply = response.choices[0].message.content
-    return JSONResponse({"reply": ai_reply})
