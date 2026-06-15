@@ -13,7 +13,7 @@ COPY auth.py .
 COPY templates ./templates
 COPY static ./static
 
-RUN ls -R /app
+RUN ls -l /app/templates
 
 # Expose Render port
 EXPOSE 10000
