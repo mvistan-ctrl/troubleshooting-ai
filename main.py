@@ -54,7 +54,7 @@ async def chat_endpoint(request: Request):
     try:
         # NEW MODEL NAME (2026)
         chat_completion = client.chat.completions.create(
-            model="llama3-70b",   # ✔ This model exists in the NEW API
+            model="llama3-70b-8192",   # ✔ This model exists in the NEW API
             messages=[
                 {"role": "user", "content": message}
             ]
