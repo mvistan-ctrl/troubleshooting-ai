@@ -33,3 +33,23 @@ async def login(data: dict):
 @app.get("/chat")
 async def chat_page(request: Request):
     return templates.TemplateResponse("chat.html", {"request": request})
+
+@app.post("/api/chat")
+async def chat_endpoint(request: Request):
+    body = await request.json()
+    message = body.get("message")
+
+    if not message:
+        return {"reply": "I didn't receive a message."}
+
+    # Call Groq
+    chat_completion = client.chat.completions.create(
+        model="llama3-8b-8192",
+        messages=[
+            {"role": "user", "content": message}
+        ]
+    )
+
+    ai_reply = chat_completion.choices[0].message["content"]
+
+    return {"reply": ai_reply}
