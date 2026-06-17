@@ -36,11 +36,22 @@ async def chat_page(request: Request):
 
 @app.post("/api/chat")
 async def chat_endpoint(request: Request):
+    if not GROQ_API_KEY:return {"reply": "Server error: GROQ API key is missing."}
     body = await request.json()
     message = body.get("message")
 
     if not message:
         return {"reply": "I didn't receive a message."}
+    try:
+        chat_completion = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[{"role": "user", "content": message}]
+        )
+        ai_reply = chat_completion.choices[0].message["content"]
+        return {"reply": ai_reply}
+
+    except Exception as e:
+        return {"reply": f"Server error: {str(e)}"}
 
     # Call Groq
     chat_completion = client.chat.completions.create(
