@@ -52,7 +52,7 @@ async def chat_endpoint(request: Request):
                 "Content-Type": "application/json"
             },
             json={
-                "model": "llama3-70b",
+                "model": "llama3-8b",
                 "messages": [
                     {"role": "user", "content": message}
                 ]
