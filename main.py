@@ -44,9 +44,12 @@ async def chat_endpoint(request: Request):
         return {"reply": "I didn't receive a message."}
     try:
         chat_completion = client.chat.completions.create(
-            model="llama3-70b-versatile",
-            messages=[{"role": "user", "content": message}]
-        )
+    model="mixtral-8x7b-32768",
+    messages=[
+        {"role": "user", "content": message}
+    ]
+)
+
         ai_reply = chat_completion.choices[0].message["content"]
         return {"reply": ai_reply}
 
@@ -55,7 +58,7 @@ async def chat_endpoint(request: Request):
 
     # Call Groq
     chat_completion = client.chat.completions.create(
-        model="llama3-70b-versatile",
+        model="mixtral-8x7b-32768",
         messages=[
             {"role": "user", "content": message}
         ]
