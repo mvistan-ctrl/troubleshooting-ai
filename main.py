@@ -55,7 +55,7 @@ async def chat_endpoint(request: Request):
 
     # Call Groq
     chat_completion = client.chat.completions.create(
-        model="llama3-8b",
+        model="llama3-70b",
         messages=[
             {"role": "user", "content": message}
         ]
