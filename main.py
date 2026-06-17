@@ -17,7 +17,7 @@ templates.env.cache = {}
 
 @app.get("/", response_class=HTMLResponse)
 async def login_page(request: Request):
-    return templates.TemplateResponse("login.html", {})
+    return templates.TemplateResponse("login.html", {"request": request})
 
 @app.post("/login")
 async def login(data: dict):
