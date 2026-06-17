@@ -1,6 +1,6 @@
 # Use Python 3.11
 FROM python:3.11-slim-bullseye
-ARG CACHE_BREAK=3
+ARG CACHE_BREAK=4
 
 # Set working directory
 WORKDIR /app
@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY main.py .
 COPY auth.py .
-COPY templates ./templates
+COPY ./templates ./templates
 COPY static ./static
 RUN echo "=== TEMPLATE FOLDER CONTENTS ===" && ls -l /app/templates
 
